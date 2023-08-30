@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Month from "./components/Week";
 
 const Calendar = () => {
+  // Getting the Week Array from helper method and setting it to the state
   const [currentWeek, setCurrentWeek] = useState(getWeeksOfMonth({}));
 
   const { weekIndex, timeZone } = useCalendarContext();

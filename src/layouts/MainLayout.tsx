@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
+    // This is just to make the component Lazy Load and Hold Any Error Boundaries with Suspense
     <ErrorBoundary fallback={<ErrorFallback />}>
       <SuspenseWrapper>
         <Outlet />

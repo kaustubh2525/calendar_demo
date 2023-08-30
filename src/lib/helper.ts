@@ -8,6 +8,7 @@ dayjs.extend(weekOfYear);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+// getWeeksOfMonth is used to create week array and additional parameters provides next or previous weeks array
 export const getWeeksOfMonth = ({
   weekIndex = dayjs().week(),
   timeZone = "Asia/Kolkata",
