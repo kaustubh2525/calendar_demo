@@ -4,13 +4,14 @@ import data from "@/json/data.json";
 import { convertTimezone, createTimeSlots } from "@/lib/timeSlotUtils";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { DayProps } from "../interface/interface";
 
 const startHour = 8;
 const endHour = 23;
 
 const Day = ({ day }: DayProps) => {
+  const [randomJson, setRandomJson] = useState(data);
   const { timeZone } = useCalendarContext();
 
   const getCurrentDayClass = () => {
@@ -29,7 +30,7 @@ const Day = ({ day }: DayProps) => {
   useEffect(() => {
     data.find((res) => {
       if (res.date === dayjs(day).format("YYYY-MM-DD")) {
-        console.log(res);
+        // console.log(res);
       }
     });
   }, [day]);
@@ -60,7 +61,7 @@ const Day = ({ day }: DayProps) => {
                     <Checkbox
                       id={i?.toString()}
                       checked={
-                        data.find(
+                        randomJson.find(
                           (res) => res.date === dayjs(day).format("YYYY-MM-DD")
                         )?.time === slot.time
                           ? true
