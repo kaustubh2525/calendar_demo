@@ -1,9 +1,10 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import useCalendarContext from "@/hooks/useCalendarContext";
+import data from "@/json/data.json";
 import { convertTimezone, createTimeSlots } from "@/lib/timeSlotUtils";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { DayProps } from "../interface/interface";
 
 const startHour = 8;
@@ -24,6 +25,14 @@ const Day = ({ day }: DayProps) => {
 
     return convertedTimeSlot;
   }, [timeZone]);
+
+  useEffect(() => {
+    data.find((res) => {
+      if (res.date === dayjs(day).format("YYYY-MM-DD")) {
+        console.log(res);
+      }
+    });
+  }, [day]);
 
   return (
     <>
@@ -48,7 +57,16 @@ const Day = ({ day }: DayProps) => {
                     htmlFor={i?.toString()}
                     className="flex items-center gap-x-2"
                   >
-                    <Checkbox id={i?.toString()} />
+                    <Checkbox
+                      id={i?.toString()}
+                      checked={
+                        data.find(
+                          (res) => res.date === dayjs(day).format("YYYY-MM-DD")
+                        )?.time === slot.time
+                          ? true
+                          : false
+                      }
+                    />
                     <span>{slot.time}</span>
                   </label>
                 );
