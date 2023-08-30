@@ -52,6 +52,15 @@ const Day = ({ day }: DayProps) => {
           <div className="grid grid-cols-12 gap-x-5 gap-y-2">
             {dayjs(day).format("YYYY-MM-DD") >= dayjs().format("YYYY-MM-DD") ? (
               timeSlots.map((slot, i) => {
+                // randomJson.find((res) => {
+                //   if (
+                //     res.date === dayjs(day).format("YYYY-MM-DD") &&
+                //     res.time === slot.time
+                //   ) {
+                //     console.log(res.date);
+                //   }
+                // });
+
                 return (
                   <label
                     key={i}
@@ -62,10 +71,10 @@ const Day = ({ day }: DayProps) => {
                       id={i?.toString()}
                       checked={
                         randomJson.find(
-                          (res) => res.date === dayjs(day).format("YYYY-MM-DD")
-                        )?.time === slot.time
-                          ? true
-                          : false
+                          (res) =>
+                            res.date === dayjs(day).format("YYYY-MM-DD") &&
+                            res.time === slot.time
+                        )?.checked
                       }
                     />
                     <span>{slot.time}</span>
