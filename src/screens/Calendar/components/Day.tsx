@@ -4,14 +4,14 @@ import data from "@/json/data.json";
 import { convertTimezone, createTimeSlots } from "@/lib/timeSlotUtils";
 import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { DayProps } from "../interface/interface";
 
 const startHour = 8;
 const endHour = 23;
 
 const Day = ({ day }: DayProps) => {
-  const [randomJson, setRandomJson] = useState(data);
+  const [randomJson] = useState(data);
   const { timeZone } = useCalendarContext();
 
   const getCurrentDayClass = () => {
@@ -26,14 +26,6 @@ const Day = ({ day }: DayProps) => {
 
     return convertedTimeSlot;
   }, [timeZone]);
-
-  useEffect(() => {
-    data.find((res) => {
-      if (res.date === dayjs(day).format("YYYY-MM-DD")) {
-        // console.log(res);
-      }
-    });
-  }, [day]);
 
   return (
     <>
@@ -52,15 +44,6 @@ const Day = ({ day }: DayProps) => {
           <div className="grid grid-cols-12 gap-x-5 gap-y-2">
             {dayjs(day).format("YYYY-MM-DD") >= dayjs().format("YYYY-MM-DD") ? (
               timeSlots.map((slot, i) => {
-                // randomJson.find((res) => {
-                //   if (
-                //     res.date === dayjs(day).format("YYYY-MM-DD") &&
-                //     res.time === slot.time
-                //   ) {
-                //     console.log(res.date);
-                //   }
-                // });
-
                 return (
                   <label
                     key={i}
