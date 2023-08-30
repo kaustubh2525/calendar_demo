@@ -1,0 +1,3 @@
+.noScrollBarView::-webkit-scrollbar {
+  width: 0;
+}
